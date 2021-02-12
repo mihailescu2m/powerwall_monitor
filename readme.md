@@ -37,6 +37,8 @@ Monitoring the Tesla Powerwall with the TICK framework
 
 Note: the database queries are set to use `Australia/Adelaide` as timezone. Edit the database commands above and `dashboard.json` to replace `Australia/Adelaide` with your own timezone.
 
+Note also: influxdb does not run reliably on older models of Raspberry Pi, resulting in the Docker container terminating with `error 139`.  
+
 Enjoy!
 ---
 If you found this useful, say _Thank You!_ [with a beer.](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=mihailescu2m%40gmail%2Ecom&lc=AU&item_name=memeka&item_number=odroid&currency_code=AUD&bn=PP%2DDonationsBF%3Abtn_donate_LG%2Egif%3ANonHosted)
