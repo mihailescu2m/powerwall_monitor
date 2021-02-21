@@ -112,10 +112,10 @@
               "type": "time"
             }
           ],
-          "measurement": "http",
+          "measurement": "exec",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT \"mean_load_instant_power\" FROM \"http\" WHERE $timeFilter tz('Australia/Adelaide')",
+          "query": "SELECT \"mean_load_instant_power\" FROM \"exec\" WHERE $timeFilter tz('America/New_York')",
           "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
@@ -134,7 +134,7 @@
             ]
           ],
           "tags": [],
-          "tz": "Australia/Adelaide"
+          "tz": "America/New_York"
         },
         {
           "alias": "Solar Energy",
@@ -148,7 +148,7 @@
             }
           ],
           "hide": false,
-          "measurement": "http",
+          "measurement": "exec",
           "orderByTime": "ASC",
           "policy": "autogen",
           "refId": "B",
@@ -168,7 +168,7 @@
             ]
           ],
           "tags": [],
-          "tz": "Australia/Adelaide"
+          "tz": "America/New_York"
         },
         {
           "alias": "Powerwall",
@@ -182,10 +182,10 @@
             }
           ],
           "hide": false,
-          "measurement": "http",
+          "measurement": "exec",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT mean(from_pw) - mean(to_pw) FROM autogen.http WHERE $timeFilter GROUP BY time(5m) tz('Australia/Adelaide')",
+          "query": "SELECT mean(from_pw) - mean(to_pw) FROM autogen.exec WHERE $timeFilter GROUP BY time(5m) tz('America/New_York')",
           "rawQuery": true,
           "refId": "C",
           "resultFormat": "time_series",
@@ -204,7 +204,7 @@
             ]
           ],
           "tags": [],
-          "tz": "Australia/Adelaide"
+          "tz": "America/New_York"
         },
         {
           "alias": "Grid Usage",
@@ -224,10 +224,10 @@
             }
           ],
           "hide": false,
-          "measurement": "http",
+          "measurement": "exec",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT mean(from_grid) - mean(to_grid) FROM autogen.http WHERE $timeFilter GROUP BY time(5m) tz('Australia/Adelaide')",
+          "query": "SELECT mean(from_grid) - mean(to_grid) FROM autogen.exec WHERE $timeFilter GROUP BY time(5m) tz('America/New_York')",
           "rawQuery": true,
           "refId": "D",
           "resultFormat": "time_series",
@@ -246,7 +246,7 @@
             ]
           ],
           "tags": [],
-          "tz": "Australia/Adelaide"
+          "tz": "America/New_York"
         },
         {
           "alias": "Charge",
@@ -266,10 +266,10 @@
             }
           ],
           "hide": false,
-          "measurement": "http",
+          "measurement": "exec",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT \"mean_percentage\" FROM \"http\" WHERE $timeFilter",
+          "query": "SELECT \"mean_percentage\" FROM \"exec\" WHERE $timeFilter",
           "rawQuery": false,
           "refId": "E",
           "resultFormat": "time_series",
@@ -294,7 +294,7 @@
             ]
           ],
           "tags": [],
-          "tz": "Australia/Adelaide"
+          "tz": "America/New_York"
         },
         {
           "datasource": "Sun and Moon",
@@ -396,10 +396,10 @@
       "targets": [
         {
           "groupBy": [],
-          "measurement": "http",
+          "measurement": "exec",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT last(\"percentage\")  /0.95 - 5/0.95 FROM \"http\" WHERE $timeFilter tz('Australia/Adelaide')",
+          "query": "SELECT last(\"percentage\")  /0.95 - 5/0.95 FROM \"exec\" WHERE $timeFilter tz('America/New_York')",
           "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
@@ -424,7 +424,7 @@
             ]
           ],
           "tags": [],
-          "tz": "Australia/Adelaide"
+          "tz": "America/New_York"
         }
       ],
       "timeFrom": null,
@@ -498,10 +498,10 @@
               "type": "fill"
             }
           ],
-          "measurement": "http",
+          "measurement": "exec",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT  (1+from_solar/abs(from_solar))*from_solar/2  FROM (SELECT integral(solar)/1000/3600 - integral(to_pw)/1000/3600 - integral(to_grid)/1000/3600  AS from_solar FROM autogen.http WHERE  $timeFilter tz('Australia/Adelaide'))",
+          "query": "SELECT  (1+from_solar/abs(from_solar))*from_solar/2  FROM (SELECT integral(solar)/1000/3600 - integral(to_pw)/1000/3600 - integral(to_grid)/1000/3600  AS from_solar FROM autogen.exec WHERE  $timeFilter tz('America/New_York'))",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -520,12 +520,12 @@
             ]
           ],
           "tags": [],
-          "tz": "Australia/Adelaide"
+          "tz": "America/New_York"
         },
         {
           "alias": "From Powerwall",
           "groupBy": [],
-          "measurement": "http",
+          "measurement": "exec",
           "orderByTime": "ASC",
           "policy": "autogen",
           "refId": "B",
@@ -551,12 +551,12 @@
             ]
           ],
           "tags": [],
-          "tz": "Australia/Adelaide"
+          "tz": "America/New_York"
         },
         {
           "alias": "From Grid",
           "groupBy": [],
-          "measurement": "http",
+          "measurement": "exec",
           "orderByTime": "ASC",
           "policy": "autogen",
           "refId": "C",
@@ -582,7 +582,7 @@
             ]
           ],
           "tags": [],
-          "tz": "Australia/Adelaide"
+          "tz": "America/New_York"
         }
       ],
       "timeFrom": null,
@@ -653,10 +653,10 @@
           "alias": "solar",
           "groupBy": [],
           "hide": false,
-          "measurement": "http",
+          "measurement": "exec",
           "orderByTime": "ASC",
           "policy": "kwh",
-          "query": "SELECT sum(\"solar\")   * 0.179 FROM \"daily\".\"http\" WHERE $timeFilter GROUP BY time(1d) tz('Australia/Adelaide')",
+          "query": "SELECT sum(\"solar\")   * 0.179 FROM \"daily\".\"exec\" WHERE $timeFilter GROUP BY time(1d) tz('America/New_York')",
           "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
@@ -681,7 +681,7 @@
             ]
           ],
           "tags": [],
-          "tz": "Australia/Adelaide"
+          "tz": "America/New_York"
         },
         {
           "alias": "combined",
@@ -700,10 +700,10 @@
             }
           ],
           "hide": false,
-          "measurement": "http",
+          "measurement": "exec",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT s + g FROM (SELECT sum(solar)  * 0.358 AS s, sum(to_grid) * 0.179 AS g FROM kwh.http WHERE  $timeFilter tz('Australia/Adelaide'))",
+          "query": "SELECT s + g FROM (SELECT sum(solar)  * 0.358 AS s, sum(to_grid) * 0.179 AS g FROM kwh.exec WHERE  $timeFilter tz('America/New_York'))",
           "rawQuery": true,
           "refId": "B",
           "resultFormat": "time_series",
@@ -733,10 +733,10 @@
           "alias": "battery",
           "groupBy": [],
           "hide": false,
-          "measurement": "http",
+          "measurement": "exec",
           "orderByTime": "ASC",
           "policy": "kwh",
-          "query": "SELECT \"from_pw\"   * 0.358 FROM \"kwh\".\"http\" WHERE $timeFilter tz('Australia/Adelaide')",
+          "query": "SELECT \"from_pw\"   * 0.358 FROM \"kwh\".\"exec\" WHERE $timeFilter tz('America/New_York')",
           "rawQuery": false,
           "refId": "C",
           "resultFormat": "time_series",
@@ -757,7 +757,7 @@
             ]
           ],
           "tags": [],
-          "tz": "Australia/Adelaide"
+          "tz": "America/New_York"
         }
       ],
       "thresholds": [],
@@ -887,7 +887,7 @@
           "null_color": "darkred",
           "null_textcolor": "black",
           "null_value": "No data",
-          "pattern": "http.Grid",
+          "pattern": "exec.Grid",
           "row_col_wrapper": "_",
           "row_name": "_1_",
           "textColors": "white | white | white",
@@ -926,7 +926,7 @@
           "null_color": "darkred",
           "null_textcolor": "black",
           "null_value": "No data",
-          "pattern": "http.Battery",
+          "pattern": "exec.Battery",
           "row_col_wrapper": "_",
           "row_name": "_1_",
           "textColors": "white | white | white",
@@ -965,7 +965,7 @@
           "null_color": "darkred",
           "null_textcolor": "black",
           "null_value": "No data",
-          "pattern": "http.Solar",
+          "pattern": "exec.Solar",
           "row_col_wrapper": "_",
           "row_name": "_1_",
           "textColors": "white|black",
@@ -986,10 +986,10 @@
       "targets": [
         {
           "groupBy": [],
-          "measurement": "http",
+          "measurement": "exec",
           "orderByTime": "ASC",
           "policy": "raw",
-          "query": "SELECT last(\"battery_instant_power\")  / 1000 AS \"Powerwall\", last(\"solar_instant_power\")  / 1000 AS \"Solar\", last(\"load_instant_power\")  / 1000 AS \"Home\", last(\"site_instant_power\")  / 1000 AS \"Grid\" FROM \"raw\".\"http\" WHERE $timeFilter",
+          "query": "SELECT last(\"battery_instant_power\")  / 1000 AS \"Powerwall\", last(\"solar_instant_power\")  / 1000 AS \"Solar\", last(\"load_instant_power\")  / 1000 AS \"Home\", last(\"site_instant_power\")  / 1000 AS \"Grid\" FROM \"raw\".\"exec\" WHERE $timeFilter",
           "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
@@ -1166,10 +1166,10 @@
       "targets": [
         {
           "groupBy": [],
-          "measurement": "http",
+          "measurement": "exec",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT integral(\"load_instant_power\")  / 1000 / 3600 FROM \"http\" WHERE $timeFilter GROUP BY time(1h) tz('Australia/Adelaide')",
+          "query": "SELECT integral(\"load_instant_power\")  / 1000 / 3600 FROM \"exec\" WHERE $timeFilter GROUP BY time(1h) tz('America/New_York')",
           "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
@@ -1194,7 +1194,7 @@
             ]
           ],
           "tags": [],
-          "tz": "Australia/Adelaide"
+          "tz": "America/New_York"
         }
       ],
       "thresholds": "",
@@ -1279,10 +1279,10 @@
       "targets": [
         {
           "groupBy": [],
-          "measurement": "http",
+          "measurement": "exec",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT integral(\"battery_instant_power\")  / 1000 / 3600 FROM \"http\" WHERE (\"battery_instant_power\" > 0) AND $timeFilter tz('Australia/Adelaide')",
+          "query": "SELECT integral(\"battery_instant_power\")  / 1000 / 3600 FROM \"exec\" WHERE (\"battery_instant_power\" > 0) AND $timeFilter tz('America/New_York')",
           "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
@@ -1307,7 +1307,7 @@
             ]
           ],
           "tags": [],
-          "tz": "Australia/Adelaide"
+          "tz": "America/New_York"
         }
       ],
       "thresholds": "",
@@ -1392,10 +1392,10 @@
       "targets": [
         {
           "groupBy": [],
-          "measurement": "http",
+          "measurement": "exec",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT integral(\"site_instant_power\", 1m)  / 1000 / 3600 * 60 FROM \"http\" WHERE (\"site_instant_power\" > 0) AND $timeFilter",
+          "query": "SELECT integral(\"site_instant_power\", 1m)  / 1000 / 3600 * 60 FROM \"exec\" WHERE (\"site_instant_power\" > 0) AND $timeFilter",
           "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
@@ -1420,7 +1420,7 @@
             ]
           ],
           "tags": [],
-          "tz": "Australia/Adelaide"
+          "tz": "America/New_York"
         }
       ],
       "thresholds": "",
@@ -1506,10 +1506,10 @@
         {
           "groupBy": [],
           "limit": "",
-          "measurement": "http",
+          "measurement": "exec",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT integral(\"solar_instant_power\")  / 1000 / 3600 FROM \"http\" WHERE $timeFilter",
+          "query": "SELECT integral(\"solar_instant_power\")  / 1000 / 3600 FROM \"exec\" WHERE $timeFilter",
           "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
@@ -1534,7 +1534,7 @@
             ]
           ],
           "tags": [],
-          "tz": "Australia/Adelaide"
+          "tz": "America/New_York"
         }
       ],
       "thresholds": "",
@@ -1621,10 +1621,10 @@
       "targets": [
         {
           "groupBy": [],
-          "measurement": "http",
+          "measurement": "exec",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT integral(\"battery_instant_power\")  / -1000 / 3600 FROM \"http\" WHERE (\"battery_instant_power\" <= 0) AND $timeFilter GROUP BY time(1h) tz('Australia/Adelaide')",
+          "query": "SELECT integral(\"battery_instant_power\")  / -1000 / 3600 FROM \"exec\" WHERE (\"battery_instant_power\" <= 0) AND $timeFilter GROUP BY time(1h) tz('America/New_York')",
           "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
@@ -1649,7 +1649,7 @@
             ]
           ],
           "tags": [],
-          "tz": "Australia/Adelaide"
+          "tz": "America/New_York"
         }
       ],
       "thresholds": "",
@@ -1734,10 +1734,10 @@
       "targets": [
         {
           "groupBy": [],
-          "measurement": "http",
+          "measurement": "exec",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT integral(\"site_instant_power\",1m)  / -1000 / 3600 * 60 FROM \"http\" WHERE (\"site_instant_power\" < 0) AND $timeFilter GROUP BY time(1h) tz('Australia/Adelaide')",
+          "query": "SELECT integral(\"site_instant_power\",1m)  / -1000 / 3600 * 60 FROM \"exec\" WHERE (\"site_instant_power\" < 0) AND $timeFilter GROUP BY time(1h) tz('America/New_York')",
           "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
@@ -1762,7 +1762,7 @@
             ]
           ],
           "tags": [],
-          "tz": "Australia/Adelaide"
+          "tz": "America/New_York"
         }
       ],
       "thresholds": "",
@@ -1853,10 +1853,10 @@
               "type": "fill"
             }
           ],
-          "measurement": "http",
+          "measurement": "exec",
           "orderByTime": "ASC",
           "policy": "kwh",
-          "query": "SELECT sum(\"home\") FROM \"kwh\".\"http\" WHERE $timeFilter GROUP BY time(1d) fill(0) tz('Australia/Adelaide')",
+          "query": "SELECT sum(\"home\") FROM \"kwh\".\"exec\" WHERE $timeFilter GROUP BY time(1d) fill(0) tz('America/New_York')",
           "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
@@ -1875,7 +1875,7 @@
             ]
           ],
           "tags": [],
-          "tz": "Australia/Adelaide"
+          "tz": "America/New_York"
         }
       ],
       "thresholds": [],
@@ -1978,7 +1978,7 @@
               "type": "fill"
             }
           ],
-          "measurement": "http",
+          "measurement": "exec",
           "orderByTime": "ASC",
           "policy": "kwh",
           "refId": "A",
@@ -2004,7 +2004,7 @@
               "value": "0"
             }
           ],
-          "tz": "Australia/Adelaide"
+          "tz": "America/New_York"
         }
       ],
       "thresholds": [],
@@ -2107,7 +2107,7 @@
               "type": "fill"
             }
           ],
-          "measurement": "http",
+          "measurement": "exec",
           "orderByTime": "ASC",
           "policy": "kwh",
           "refId": "A",
@@ -2127,7 +2127,7 @@
             ]
           ],
           "tags": [],
-          "tz": "Australia/Adelaide"
+          "tz": "America/New_York"
         }
       ],
       "thresholds": [],
@@ -2176,8 +2176,8 @@
       "aliasColors": {
         "From Grid": "red",
         "To Grid": "purple",
-        "http.From Grid": "red",
-        "http.To Grid": "purple"
+        "exec.From Grid": "red",
+        "exec.To Grid": "purple"
       },
       "bars": true,
       "dashLength": 10,
@@ -2214,7 +2214,7 @@
       "renderer": "flot",
       "seriesOverrides": [
         {
-          "alias": "http.From Grid"
+          "alias": "exec.From Grid"
         }
       ],
       "spaceLength": 10,
@@ -2237,10 +2237,10 @@
               "type": "fill"
             }
           ],
-          "measurement": "http",
+          "measurement": "exec",
           "orderByTime": "ASC",
           "policy": "kwh",
-          "query": "SELECT sum(\"from_grid\") FROM \"daily\".\"http\" WHERE $timeFilter GROUP BY time(1d) fill(0) tz('Australia/Adelaide')",
+          "query": "SELECT sum(\"from_grid\") FROM \"daily\".\"exec\" WHERE $timeFilter GROUP BY time(1d) fill(0) tz('America/New_York')",
           "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
@@ -2259,7 +2259,7 @@
             ]
           ],
           "tags": [],
-          "tz": "Australia/Adelaide"
+          "tz": "America/New_York"
         },
         {
           "alias": "To Grid",
@@ -2277,10 +2277,10 @@
               "type": "fill"
             }
           ],
-          "measurement": "http",
+          "measurement": "exec",
           "orderByTime": "ASC",
           "policy": "kwh",
-          "query": "SELECT sum(\"to_grid\")  * -1 FROM \"daily\".\"http\" WHERE $timeFilter GROUP BY time(1d) fill(0) tz('Australia/Adelaide')",
+          "query": "SELECT sum(\"to_grid\")  * -1 FROM \"daily\".\"exec\" WHERE $timeFilter GROUP BY time(1d) fill(0) tz('America/New_York')",
           "rawQuery": false,
           "refId": "B",
           "resultFormat": "time_series",
@@ -2305,7 +2305,7 @@
             ]
           ],
           "tags": [],
-          "tz": "Australia/Adelaide"
+          "tz": "America/New_York"
         }
       ],
       "thresholds": [],
