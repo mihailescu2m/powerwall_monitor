@@ -9,6 +9,11 @@ Monitoring the Tesla Powerwall with the TICK framework
 
 ## Installation
 * edit `powerwall.yml` and replace `192.168.91.1` with your powerwall IP
+* create a file called `.env.telegraf` to define the `POWERWALL_PASSWORD` which
+  is used for authentication. This should be a single line that looks like this:
+	```
+	POWERWALL_PASSWORD=YourPowerwallPassword
+	```
 * start the docker containers: `docker-compose -f powerwall.yml up -d`
 * connect to the Influx database shell: `docker exec -it influxdb influx`
 * at the database prompt, enter the following commands:

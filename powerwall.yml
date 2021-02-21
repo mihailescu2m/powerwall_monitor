@@ -20,7 +20,7 @@ services:
               mode: host
 
     telegraf:
-        image: telegraf:1.12
+        build: telegraf
         container_name: telegraf
         hostname: telegraf
         restart: always
@@ -33,6 +33,8 @@ services:
             - "powerwall: 192.168.91.1"
         depends_on:
             - influxdb
+        env_file:
+            - .env.telegraf
 
     grafana:
         image: grafana/grafana:6.5.1-ubuntu
