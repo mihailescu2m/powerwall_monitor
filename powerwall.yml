@@ -19,6 +19,17 @@ services:
               published: 8086
               mode: host
 
+    cookieproxy:
+        image: pridkett/cookieproxy:0.1.0
+        container_name: cookieproxy
+        hostname: cookieproxy
+        restart: always
+        command: ["/bin/sh", "-c", '/go/bin/cookieproxy -request "{\"url\": \"https://powerwall/api/login/Basic\", \"headers\": {\"Content-Type\": \"application/json\"}, \"body\": \"{\\\"username\\\":\\\"customer\\\",\\\"password\\\":\\\"$$POWERWALL_PASSWORD\\\", \\\"force_sm_off\\\":false}\", \"method\": \"POST\"}"']
+        extra_hosts:
+            - "powerwall: 192.168.91.1"
+        env_file:
+            - .env.cookieproxy
+
     telegraf:
         image: telegraf:1.12
         container_name: telegraf
@@ -29,10 +40,9 @@ services:
               source: ./telegraf.conf
               target: /etc/telegraf/telegraf.conf
               read_only: true
-        extra_hosts:
-            - "powerwall: 192.168.91.1"
         depends_on:
             - influxdb
+            - cookieproxy
 
     grafana:
         image: grafana/grafana:6.5.1-ubuntu
